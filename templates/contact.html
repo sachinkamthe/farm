@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - Farm Fresh Products{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Page Header -->
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h1><i data-feather="mail" class="me-2"></i>Contact Us</h1>
+            <p class="lead text-muted">Get in touch to place orders or ask questions</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Contact Form -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Send us a Message</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('contact') }}">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Name *</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email *</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="tel" class="form-control" id="phone" name="phone">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="order_type" class="form-label">Inquiry Type</label>
+                                <select class="form-select" id="order_type" name="order_type">
+                                    <option value="general">General Inquiry</option>
+                                    <option value="order">Place Order</option>
+                                    <option value="delivery">Delivery Question</option>
+                                    <option value="products">Product Information</option>
+                                    <option value="feedback">Feedback</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" 
+                                      placeholder="Tell us about your order, questions, or how we can help you..." required></textarea>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i data-feather="send" class="me-2"></i>Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Contact Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <i data-feather="map-pin" class="me-2 text-success"></i>
+                            <strong>Farm Location</strong>
+                        </div>
+                        <p class="text-muted ms-4 mb-0">
+                            123 Farm Road<br>
+                            Rural Valley, State 12345
+                        </p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <i data-feather="phone" class="me-2 text-success"></i>
+                            <strong>Phone</strong>
+                        </div>
+                        <p class="text-muted ms-4 mb-0">(555) 123-4567</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <i data-feather="mail" class="me-2 text-success"></i>
+                            <strong>Email</strong>
+                        </div>
+                        <p class="text-muted ms-4 mb-0">info@farmfresh.local</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <i data-feather="clock" class="me-2 text-success"></i>
+                            <strong>Farm Hours</strong>
+                        </div>
+                        <div class="text-muted ms-4">
+                            <p class="mb-1">Monday - Friday: 7:00 AM - 6:00 PM</p>
+                            <p class="mb-1">Saturday: 7:00 AM - 5:00 PM</p>
+                            <p class="mb-0">Sunday: 8:00 AM - 4:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delivery Information -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">Delivery Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <i data-feather="truck" class="me-2 text-info"></i>
+                        <strong>Local Delivery</strong>
+                    </div>
+                    <p class="text-muted mb-3">Free delivery within 15 miles of our farm</p>
+                    
+                    <div class="d-flex align-items-center mb-2">
+                        <i data-feather="calendar" class="me-2 text-info"></i>
+                        <strong>Delivery Schedule</strong>
+                    </div>
+                    <p class="text-muted mb-0">Tuesday, Thursday, and Saturday deliveries</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Frequently Asked Questions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    How do I place an order?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    You can browse our products, add items to your cart, and then contact us through this form to complete your order. We'll confirm availability and arrange delivery.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    What is your delivery area?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We offer free delivery within 15 miles of our farm. For locations outside this area, please contact us to discuss delivery options and fees.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    Are your products organic?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We use sustainable farming practices and avoid harmful pesticides. While not all products are certified organic, we prioritize natural growing methods and can provide details about specific products.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}Shopping Cart - Farm Fresh Products{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1><i data-feather="shopping-cart" class="me-2"></i>Shopping Cart</h1>
+            <p class="text-muted">Review your selected items</p>
+        </div>
+    </div>
+
+    {% if cart_items %}
+    <div class="row">
+        <!-- Cart Items -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Cart Items</h5>
+                </div>
+                <div class="card-body p-0">
+                    {% for item in cart_items %}
+                    <div class="d-flex align-items-center p-3 border-bottom">
+                        <!-- Product Image -->
+                        <div class="flex-shrink-0 me-3">
+                            <img src="{{ item.image_url }}" alt="{{ item.name }}" 
+                                 class="rounded" style="width: 80px; height: 80px; object-fit: cover;">
+                        </div>
+
+                        <!-- Product Details -->
+                        <div class="flex-grow-1 me-3">
+                            <h6 class="mb-1">{{ item.name }}</h6>
+                            <p class="text-muted mb-2">${{ "%.2f"|format(item.price) }} each</p>
+                            
+                            <!-- Quantity Controls -->
+                            <div class="d-flex align-items-center">
+                                <label class="form-label me-2 mb-0">Quantity:</label>
+                                <div class="input-group" style="width: 120px;">
+                                    <a href="{{ url_for('update_cart', product_id=item.product_id, quantity=item.quantity-1) }}" 
+                                       class="btn btn-outline-secondary btn-sm">
+                                        <i data-feather="minus"></i>
+                                    </a>
+                                    <input type="text" class="form-control text-center" value="{{ item.quantity }}" readonly>
+                                    <a href="{{ url_for('update_cart', product_id=item.product_id, quantity=item.quantity+1) }}" 
+                                       class="btn btn-outline-secondary btn-sm">
+                                        <i data-feather="plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Price and Actions -->
+                        <div class="text-end">
+                            <div class="h6 text-success mb-2">${{ "%.2f"|format(item.subtotal) }}</div>
+                            <a href="{{ url_for('remove_from_cart', product_id=item.product_id) }}" 
+                               class="btn btn-outline-danger btn-sm">
+                                <i data-feather="trash-2" class="me-1"></i>Remove
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Cart Actions -->
+            <div class="mt-3">
+                <div class="d-flex justify-content-between">
+                    <a href="{{ url_for('products') }}" class="btn btn-outline-secondary">
+                        <i data-feather="arrow-left" class="me-2"></i>Continue Shopping
+                    </a>
+                    <a href="{{ url_for('clear_cart') }}" class="btn btn-outline-danger">
+                        <i data-feather="trash-2" class="me-2"></i>Clear Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Order Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Items ({{ cart_items|length }}):</span>
+                        <span>${{ "%.2f"|format(total) }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Shipping:</span>
+                        <span class="text-success">Free</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <strong>Total:</strong>
+                        <strong class="text-success">${{ "%.2f"|format(total) }}</strong>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <a href="{{ url_for('contact') }}" class="btn btn-success btn-lg">
+                            <i data-feather="send" class="me-2"></i>Place Order
+                        </a>
+                    </div>
+                    
+                    <div class="mt-3 text-center">
+                        <small class="text-muted">
+                            <i data-feather="info" class="me-1"></i>
+                            Contact us to complete your order
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Info -->
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6 class="mb-3">Order Information</h6>
+                    <div class="d-flex align-items-center mb-2">
+                        <i data-feather="truck" class="me-2 text-info"></i>
+                        <small>Free local delivery</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <i data-feather="shield" class="me-2 text-success"></i>
+                        <small>Fresh guarantee</small>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i data-feather="phone" class="me-2 text-warning"></i>
+                        <small>Order support available</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <!-- Empty Cart -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card text-center py-5">
+                <div class="card-body">
+                    <i data-feather="shopping-cart" class="text-muted mb-3" style="width: 64px; height: 64px;"></i>
+                    <h4>Your Cart is Empty</h4>
+                    <p class="text-muted mb-4">Add some fresh farm products to get started!</p>
+                    <a href="{{ url_for('products') }}" class="btn btn-success btn-lg">
+                        <i data-feather="package" class="me-2"></i>Shop Products
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

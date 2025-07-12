@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} - Farm Fresh Products{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('products') }}">Products</a></li>
+            <li class="breadcrumb-item active">{{ product.name }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Product Image -->
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}" 
+                     style="height: 400px; object-fit: cover;">
+            </div>
+        </div>
+
+        <!-- Product Details -->
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <!-- Product Title and Category -->
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h1 class="card-title">{{ product.name }}</h1>
+                        <span class="badge bg-secondary fs-6">{{ product.category }}</span>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="mb-4">
+                        <span class="display-6 text-success fw-bold">${{ "%.2f"|format(product.price) }}</span>
+                    </div>
+
+                    <!-- Stock Status -->
+                    <div class="mb-4">
+                        {% if product.in_stock and product.quantity > 0 %}
+                            <div class="alert alert-success d-flex align-items-center">
+                                <i data-feather="check-circle" class="me-2"></i>
+                                <div>
+                                    <strong>In Stock</strong><br>
+                                    <small>{{ product.quantity }} units available</small>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-danger d-flex align-items-center">
+                                <i data-feather="x-circle" class="me-2"></i>
+                                <div>
+                                    <strong>Out of Stock</strong><br>
+                                    <small>Currently unavailable</small>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-4">
+                        <h5>Description</h5>
+                        <p class="text-muted">{{ product.description }}</p>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex gap-3 mb-4">
+                        {% if product.in_stock and product.quantity > 0 %}
+                        <a href="{{ url_for('add_to_cart', product_id=product.id) }}" 
+                           class="btn btn-success btn-lg flex-fill">
+                            <i data-feather="shopping-cart" class="me-2"></i>Add to Cart
+                        </a>
+                        {% else %}
+                        <button class="btn btn-secondary btn-lg flex-fill" disabled>
+                            <i data-feather="x" class="me-2"></i>Out of Stock
+                        </button>
+                        {% endif %}
+                        
+                        <a href="{{ url_for('contact') }}" class="btn btn-outline-secondary btn-lg">
+                            <i data-feather="mail" class="me-2"></i>Inquire
+                        </a>
+                    </div>
+
+                    <!-- Product Info -->
+                    <div class="border-top pt-4">
+                        <h6 class="mb-3">Product Information</h6>
+                        <div class="row text-sm">
+                            <div class="col-6">
+                                <strong>Category:</strong><br>
+                                <span class="text-muted">{{ product.category }}</span>
+                            </div>
+                            <div class="col-6">
+                                <strong>Availability:</strong><br>
+                                <span class="text-muted">
+                                    {% if product.in_stock %}In Stock{% else %}Out of Stock{% endif %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Back to Products -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between">
+                <a href="{{ url_for('products') }}" class="btn btn-outline-secondary">
+                    <i data-feather="arrow-left" class="me-2"></i>Back to Products
+                </a>
+                
+                <a href="{{ url_for('products', category=product.category) }}" class="btn btn-outline-secondary">
+                    <i data-feather="grid" class="me-2"></i>More {{ product.category }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
