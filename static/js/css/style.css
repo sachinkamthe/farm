@@ -1,0 +1,251 @@
+/* Custom styles for Farm Fresh Products */
+
+/* Root variables for consistent theming */
+:root {
+    --farm-green: #228B22;
+    --farm-brown: #8B4513;
+    --farm-cream: #F5F5DC;
+    --farm-orange: #FF8C00;
+}
+
+/* Body and general styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+/* Navbar customizations */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Hero section styling */
+.bg-success {
+    background: linear-gradient(135deg, var(--farm-green) 0%, #32CD32 100%) !important;
+}
+
+/* Card hover effects */
+.card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Product image styling */
+.card-img-top {
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+/* Button customizations */
+.btn {
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-success {
+    background-color: var(--farm-green);
+    border-color: var(--farm-green);
+}
+
+.btn-success:hover {
+    background-color: #1e7e1e;
+    border-color: #1e7e1e;
+}
+
+/* Price styling */
+.text-success {
+    color: var(--farm-green) !important;
+}
+
+/* Footer styling */
+footer {
+    margin-top: auto;
+}
+
+/* Form styling */
+.form-control:focus {
+    border-color: var(--farm-green);
+    box-shadow: 0 0 0 0.2rem rgba(34, 139, 34, 0.25);
+}
+
+.form-select:focus {
+    border-color: var(--farm-green);
+    box-shadow: 0 0 0 0.2rem rgba(34, 139, 34, 0.25);
+}
+
+/* Badge styling */
+.badge {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+/* Alert styling */
+.alert {
+    border-radius: 0.5rem;
+    border: none;
+}
+
+/* Table styling */
+.table th {
+    border-top: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+}
+
+/* Modal styling */
+.modal-content {
+    border-radius: 0.5rem;
+    border: none;
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--bs-border-color);
+    background-color: var(--bs-light);
+}
+
+/* Accordion styling */
+.accordion-button:not(.collapsed) {
+    background-color: var(--farm-green);
+    color: white;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(34, 139, 34, 0.25);
+    border-color: var(--farm-green);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .lead {
+        font-size: 1rem;
+    }
+    
+    .btn-lg {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+}
+
+/* Custom utility classes */
+.text-farm-green {
+    color: var(--farm-green) !important;
+}
+
+.bg-farm-green {
+    background-color: var(--farm-green) !important;
+}
+
+.border-farm-green {
+    border-color: var(--farm-green) !important;
+}
+
+/* Loading states and animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Product grid improvements */
+.product-grid .card {
+    height: 100%;
+}
+
+.product-grid .card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-grid .card-text {
+    flex-grow: 1;
+}
+
+/* Cart styling */
+.cart-item {
+    transition: background-color 0.2s ease;
+}
+
+.cart-item:hover {
+    background-color: var(--bs-light);
+}
+
+/* Admin dashboard cards */
+.admin-card {
+    border-left: 4px solid var(--farm-green);
+}
+
+.admin-card:hover {
+    border-left-color: var(--farm-orange);
+}
+
+/* Search bar styling */
+.search-container {
+    position: relative;
+}
+
+.search-container .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Category filter buttons */
+.category-filter .btn {
+    margin: 0.25rem;
+}
+
+.category-filter .btn.active {
+    background-color: var(--farm-green);
+    border-color: var(--farm-green);
+    color: white;
+}
+
+/* Stock status indicators */
+.stock-high {
+    color: #28a745;
+}
+
+.stock-medium {
+    color: #ffc107;
+}
+
+.stock-low {
+    color: #dc3545;
+}
+
+/* Feather icon adjustments */
+[data-feather] {
+    stroke-width: 2;
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    .btn,
+    footer,
+    .modal {
+        display: none !important;
+    }
+    
+    .card {
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+    }
+}
